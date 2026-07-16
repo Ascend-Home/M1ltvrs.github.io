@@ -699,9 +699,9 @@ startScreen.addEventListener('click', async () => {
     }
   });
 
-  async function fetchDiscordActivity() {
+ async function fetchDiscordActivity() {
     try {
-      const res = await fetch(`https://api.lanyard.rest/v1/users/1485788898008367244`);
+        const res = await fetch('https://api.lanyard.rest/v1/users/1485788898008367244'); // change the number to ur discord id
       
       if (!res.ok) {
         throw new Error(`API request failed with status ${res.status}`);
