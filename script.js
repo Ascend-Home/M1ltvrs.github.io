@@ -1,5 +1,5 @@
 let hasUserInteracted = false;
-// i dont know much about js but atleast i got the work done
+
 function initMedia() {
   console.log("initMedia called");
   const backgroundMusic = document.getElementById('background-music');
@@ -9,9 +9,9 @@ function initMedia() {
     return;
   }
 
-  // Set initial volume and mute state
+
   backgroundMusic.volume = 0.3;
-  backgroundMusic.muted = true; // Start muted
+  backgroundMusic.muted = true; 
   backgroundMusic.load();
 
   backgroundMusic.play().catch(err => {
@@ -25,8 +25,8 @@ function animateTitle() {
     let index = 0;
     let isDeleting = false;
     let cursorVisible = true;
-    let typingSpeed = 100; // Base speed (ms per character)
-    let deletingSpeed = 50; // Faster when deleting
+    let typingSpeed = 100;
+    let deletingSpeed = 50;
 
     function typeTitle() {
         if (!isDeleting && index < title.length) {
@@ -37,16 +37,16 @@ function animateTitle() {
             index--;
         } else if (index === title.length) {
             isDeleting = true;
-            setTimeout(typeTitle, 2000); // Short pause before deleting
+            setTimeout(typeTitle, 2000); 
             return;
         } else if (index === 0) {
             isDeleting = false;
         }
 
-        // Add cursor and set title
+      
         document.title = currentTitle + (cursorVisible ? "|" : " ");
 
-        // Random glitch effect (10% chance)
+  
         if (Math.random() < 0.1) {
             const glitchChars = "!@#$%^&*()";
             const glitchChar = glitchChars[Math.floor(Math.random() * glitchChars.length)];
@@ -58,26 +58,26 @@ function animateTitle() {
             document.title = glitchTitle;
             setTimeout(() => {
                 document.title = currentTitle + (cursorVisible ? "|" : " ");
-            }, 100); // Very brief glitch
+            }, 100); 
         }
 
-        // Faster typing speed
+        
         setTimeout(typeTitle, isDeleting ? deletingSpeed : typingSpeed);
     }
 
-    // Blinking cursor effect
+  
     setInterval(() => {
         cursorVisible = !cursorVisible;
         document.title = currentTitle + (cursorVisible ? "|" : " ");
-    }, 300); // Faster cursor blink
+    }, 300); 
 
     typeTitle();
 }
 
-// Call this in your DOMContentLoaded event
+
 document.addEventListener('DOMContentLoaded', () => {
     animateTitle();
-    // ... rest of your existing code
+   
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -173,12 +173,12 @@ document.addEventListener('DOMContentLoaded', () => {
     startText.textContent = startTextContent + (startCursorVisible ? '|' : ' ');
   }, 500);
 
-// Updated start screen click handler
+
 startScreen.addEventListener('click', async () => {
   startScreen.classList.add('hidden');
   
   try {
-    // Unmute and ensure audio is playing
+
     backgroundMusic.muted = false;
     if (backgroundMusic.paused) {
       await backgroundMusic.play();
@@ -394,8 +394,7 @@ startScreen.addEventListener('click', async () => {
       duration: 0.5,
       ease: 'power2.in',
       onComplete: () => {
-        // Background is a CSS grid that recolors via --primary-color (set above),
-        // so there's no video file to load here.
+  
 
         if (currentAudio) {
           currentAudio.pause();
@@ -724,11 +723,11 @@ startScreen.addEventListener('click', async () => {
     }
   }
 
-  // Initialize media when DOM is loaded
+
   initMedia();
   typeWriterStart();
   
-  // Call the function initially and set interval
+
   fetchDiscordActivity();
-  setInterval(fetchDiscordActivity, 15000); // update every 15s
+  setInterval(fetchDiscordActivity, 15000); 
 });
